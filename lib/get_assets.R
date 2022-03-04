@@ -15,6 +15,8 @@ get_assets <- function(cat = default_category, sta = default_status) {
                 summarise(total = n(), health = mean(condition))
         
         # Join assets requirements
-        results <- results %>% inner_join(req, by = c("category", "location"))
+        results <- results %>% 
+                left_join(req, by = c("category", "location", "status")) %>%
+                mutate(needed = required - total)
         return(results)
 }
