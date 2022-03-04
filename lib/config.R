@@ -2,8 +2,9 @@
 suppressPackageStartupMessages(library(readr))
 
 # General default values
-default_category <- "IPOD"
-default_status <- "Deployed (deployed)"
+default_category <- "ALL"
+default_status <- "ALL"
+default_location <- "ALL"
 
 # Default file names
 assets_file <- "./data/assets.csv"
