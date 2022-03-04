@@ -1,4 +1,5 @@
 # Configuration
+suppressPackageStartupMessages(library(readr))
 
 # General default values
 default_category <- "IPOD"

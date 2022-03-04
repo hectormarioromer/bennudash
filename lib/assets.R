@@ -2,10 +2,10 @@ source("./lib/config.R")
 suppressPackageStartupMessages(library(dplyr))
 options(dplyr.summarise.inform = FALSE)
 
-get_assets <- function(cat = default_category, sta = default_status) {
+assets.by_category <- function(cat = default_category, sta = default_status) {
         # Load assets data
-        ast <- load_assets()
-        req <- load_cat_req()
+        ast <- load.assets()
+        req <- load.category_requirements()
         
         # Filter assets by category and status
         results <- ast %>% 
