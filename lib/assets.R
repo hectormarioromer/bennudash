@@ -1,6 +1,8 @@
-source("./lib/config.R")
 suppressPackageStartupMessages(library(dplyr))
 options(dplyr.summarise.inform = FALSE)
+
+source("./lib/config.R")
+source("./lib/load.R")
 
 assets.by_category <- function(cat = default_category, sta = default_status) {
         # Load assets data
@@ -60,5 +62,33 @@ assets.by_location <- function(loc = default_location, sta = default_status) {
         results <- results %>% 
                 left_join(req, by = c("category", "location", "status")) %>%
                 mutate(needed = required - total)
+        return(results)
+}
+
+
+
+
+assets.by_project <- function(pro = default_project, cat = default_category) {
+        # Load assets data
+        assets <- load.assets()
+        req <- load.category_requirements()
+        
+        # Grabs columns of interest
+        results <- assets %>% select(project, category, condition)
+        # Filter by category, if not ALL
+        if (pro != "ALL") {
+                # First filter 
+                results <- results %>% 
+                        filter(project == pro)   
+        }
+        # Filter by status if not ALL
+        if (cat != "ALL") {
+                results <- results %>% 
+                        filter(category == cat)   
+        }
+        # Complete the transformations
+        results <- results %>% 
+                group_by(project, category) %>%
+                summarise(total = n(), health = mean(condition))
         return(results)
 }

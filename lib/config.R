@@ -3,8 +3,9 @@ suppressPackageStartupMessages(library(readr))
 
 # General default values
 default_category <- "ALL"
-default_status <- "ALL"
+default_status <- "Deployed (deployed)"
 default_location <- "ALL"
+default_project <- "ALL"
 
 # Default file names
 assets_file <- "./data/assets.csv"
@@ -23,7 +24,7 @@ assets_col_names <- c("company", "asset_name", "asset_tag", "model",
                 "fully_depreciated", "checked_out_date", 
                 "expected_checkin_date", "created_at", "updated_at",
                 "last_audit", "next_audit", "notes", "mac_address", "condition",
-                "os_version", "comments", "associated_project", "imei1", 
+                "os_version", "comments", "project", "imei1", 
                 "imei2", "fidelization_date", "contract_length")
 
 assets_col_types <- cols(
@@ -78,7 +79,7 @@ assets_col_types <- cols(
         condition = col_double(),
         os_version = col_character(),
         comments = col_character(),
-        associated_project = col_character(),
+        project = col_character(),
         imei1 = col_character(),
         imei2 = col_character(),
         fidelization_date= col_datetime(format = ""),
