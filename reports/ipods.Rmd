@@ -1,0 +1,14 @@
+---
+title: "Parque Operativo: IPODS"
+output: html_notebook
+---
+
+## Generales
+
+El presente documento da respuesta a las siguientes preguntas sobre los IPODS en nuestro parque operativo: 
+
+- Cuántos tenemos por tienda? Cuántos debemos tener?
+- Considerando su condición, cuál es la salud del parque operativo?
+- Cuántos han tenido reemplazo de batería? Cuántos no?
+- Cuál es el tiempo de vida promedio?
+
