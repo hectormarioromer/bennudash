@@ -85,4 +85,3 @@ assets_col_types <- cols(
         fidelization_date= col_datetime(format = ""),
         contract_length = col_number()
 )
-                
