@@ -35,3 +35,4 @@ load.category_requirements <- function(filename = cat_req_file) {
                       col_types = "fffnn")
         return(d)
 }
+

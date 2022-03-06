@@ -1,6 +1,8 @@
 ---
 title: "Parque Operativo: IPODS"
 output: html_notebook
+editor_options: 
+  chunk_output_type: inline
 ---
 
 ## Generales
@@ -9,6 +11,6 @@ El presente documento da respuesta a las siguientes preguntas sobre los IPODS en
 
 - Cuántos tenemos por tienda? Cuántos debemos tener?
 - Considerando su condición, cuál es la salud del parque operativo?
-- Cuántos han tenido reemplazo de batería? Cuántos no?
-- Cuál es el tiempo de vida promedio?
+- Cuál es el tiempo de vida promedio? 
 
+Para responder estas preguntas, usaremos la información disponible en el sistema de gestión de activos Snipe-IT. 
