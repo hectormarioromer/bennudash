@@ -1765,19 +1765,39 @@ pre code {
 <p>El presente documento da respuesta a las siguientes preguntas sobre
 los IPODS en nuestro parque operativo:</p>
 <ul>
-<li>Cuántos tenemos por tienda? Cuántos debemos tener?</li>
+<li>Cuántos IPODS tenemos por tienda? Cuántos debemos tener?</li>
 <li>Considerando su condición, cuál es la salud del parque
 operativo?</li>
-<li>Cuántos equipos han tenido reemplazo de batería? Posteriormente,
-cuántos fueron reintegrados? Cuántos fueron descartados?</li>
+<li>Cuántos IPODS han tenido reemplazo de batería? Cuántos fueron
+reintegrados? Cuántos fueron descartados?</li>
 </ul>
 <p>Para responder estas preguntas, usaremos como fuente principal la
 información disponible en el sistema de gestión de activos Snipe-IT,
 implementado en Junio del 2021.</p>
+</div>
+<div id="desarrollo" class="section level2">
+<h2>Desarrollo</h2>
+<div id="cuántos-ipods-tenemos-por-tienda" class="section level3">
+<h3>Cuántos IPODS tenemos por tienda?</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc291cmNlKFwiLi9saWIvYXNzZXRzLlJcIilcblxuYGBgIn0= -->
+<pre class="r"><code>source(&quot;./lib/assets.R&quot;)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiBmaWxlKGZpbGVuYW1lLCBcInJcIiwgZW5jb2RpbmcgPSBlbmNvZGluZykgOlxuICBjYW5ub3Qgb3BlbiBmaWxlICcuL2xpYi9hc3NldHMuUic6IE5vIHN1Y2ggZmlsZSBvciBkaXJlY3RvcnlcbkVycm9yIGluIGZpbGUoZmlsZW5hbWUsIFwiclwiLCBlbmNvZGluZyA9IGVuY29kaW5nKSA6IFxuICBjYW5ub3Qgb3BlbiB0aGUgY29ubmVjdGlvblxuIn0= -->
+<pre><code>Warning in file(filename, &quot;r&quot;, encoding = encoding) :
+  cannot open file &#39;./lib/assets.R&#39;: No such file or directory
+Error in file(filename, &quot;r&quot;, encoding = encoding) : 
+  cannot open the connection</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 </div>
+</div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUGFycXVlIE9wZXJhdGl2bzogSVBPRFMiCm91dHB1dDogaHRtbF9ub3RlYm9vawplZGl0b3Jfb3B0aW9uczogCiAgY2h1bmtfb3V0cHV0X3R5cGU6IGlubGluZQotLS0KCiMjIEdlbmVyYWxlcwoKRWwgcHJlc2VudGUgZG9jdW1lbnRvIGRhIHJlc3B1ZXN0YSBhIGxhcyBzaWd1aWVudGVzIHByZWd1bnRhcyBzb2JyZSBsb3MgSVBPRFMgZW4gbnVlc3RybyBwYXJxdWUgb3BlcmF0aXZvOiAKCi0gQ3XDoW50b3MgdGVuZW1vcyBwb3IgdGllbmRhPyBDdcOhbnRvcyBkZWJlbW9zIHRlbmVyPwotIENvbnNpZGVyYW5kbyBzdSBjb25kaWNpw7NuLCBjdcOhbCBlcyBsYSBzYWx1ZCBkZWwgcGFycXVlIG9wZXJhdGl2bz8KLSBDdcOhbnRvcyBlcXVpcG9zIGhhbiB0ZW5pZG8gcmVlbXBsYXpvIGRlIGJhdGVyw61hPyBQb3N0ZXJpb3JtZW50ZSwgY3XDoW50b3MgZnVlcm9uIHJlaW50ZWdyYWRvcz8gQ3XDoW50b3MgZnVlcm9uIGRlc2NhcnRhZG9zPwoKUGFyYSByZXNwb25kZXIgZXN0YXMgcHJlZ3VudGFzLCB1c2FyZW1vcyBjb21vIGZ1ZW50ZSBwcmluY2lwYWwgbGEgaW5mb3JtYWNpw7NuIGRpc3BvbmlibGUgZW4gZWwgc2lzdGVtYSBkZSBnZXN0acOzbiBkZSBhY3Rpdm9zIFNuaXBlLUlULCBpbXBsZW1lbnRhZG8gZW4gSnVuaW8gZGVsIDIwMjEuIAoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUGFycXVlIE9wZXJhdGl2bzogSVBPRFMiCm91dHB1dDogaHRtbF9ub3RlYm9vawplZGl0b3Jfb3B0aW9uczogCiAgY2h1bmtfb3V0cHV0X3R5cGU6IGlubGluZQotLS0KCiMjIEdlbmVyYWxlcwoKRWwgcHJlc2VudGUgZG9jdW1lbnRvIGRhIHJlc3B1ZXN0YSBhIGxhcyBzaWd1aWVudGVzIHByZWd1bnRhcyBzb2JyZSBsb3MgSVBPRFMgZW4gbnVlc3RybyBwYXJxdWUgb3BlcmF0aXZvOiAKCi0gQ3XDoW50b3MgSVBPRFMgdGVuZW1vcyBwb3IgdGllbmRhPyBDdcOhbnRvcyBkZWJlbW9zIHRlbmVyPwotIENvbnNpZGVyYW5kbyBzdSBjb25kaWNpw7NuLCBjdcOhbCBlcyBsYSBzYWx1ZCBkZWwgcGFycXVlIG9wZXJhdGl2bz8KLSBDdcOhbnRvcyBJUE9EUyBoYW4gdGVuaWRvIHJlZW1wbGF6byBkZSBiYXRlcsOtYT8gQ3XDoW50b3MgZnVlcm9uIHJlaW50ZWdyYWRvcz8gQ3XDoW50b3MgZnVlcm9uIGRlc2NhcnRhZG9zPwoKUGFyYSByZXNwb25kZXIgZXN0YXMgcHJlZ3VudGFzLCB1c2FyZW1vcyBjb21vIGZ1ZW50ZSBwcmluY2lwYWwgbGEgaW5mb3JtYWNpw7NuIGRpc3BvbmlibGUgZW4gZWwgc2lzdGVtYSBkZSBnZXN0acOzbiBkZSBhY3Rpdm9zIFNuaXBlLUlULCBpbXBsZW1lbnRhZG8gZW4gSnVuaW8gZGVsIDIwMjEuIAoKIyMgRGVzYXJyb2xsbwojIyMgQ3XDoW50b3MgSVBPRFMgdGVuZW1vcyBwb3IgdGllbmRhPyAKCmBgYHtyfQpnZXR3ZCgpCgpgYGAKCgo=</div>
 
 
 

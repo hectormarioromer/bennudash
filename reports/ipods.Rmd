@@ -9,9 +9,18 @@ editor_options:
 
 El presente documento da respuesta a las siguientes preguntas sobre los IPODS en nuestro parque operativo: 
 
-- Cuántos tenemos por tienda? Cuántos debemos tener?
+- Cuántos IPODS tenemos por tienda? Cuántos debemos tener?
 - Considerando su condición, cuál es la salud del parque operativo?
-- Cuántos equipos han tenido reemplazo de batería? Posteriormente, cuántos fueron reintegrados? Cuántos fueron descartados?
+- Cuántos IPODS han tenido reemplazo de batería? Cuántos fueron reintegrados? Cuántos fueron descartados?
 
 Para responder estas preguntas, usaremos como fuente principal la información disponible en el sistema de gestión de activos Snipe-IT, implementado en Junio del 2021. 
+
+## Desarrollo
+### Cuántos IPODS tenemos por tienda? 
+
+```{r}
+getwd()
+
+```
+
 

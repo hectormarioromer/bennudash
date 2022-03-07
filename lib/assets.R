@@ -25,15 +25,17 @@ assets.by_category <- function(cat = default_category, sta = default_status) {
         # Complete the transformations
         results <- results %>% 
                 group_by(category, location, status) %>%
-                summarise(total = n(), health = mean(condition))
+                summarise(total = n(), condition = round(mean(condition), 
+                                                      digits = 2))
         
         # Join requirements, calculate "needed" column
         results <- results %>% 
                 left_join(req, by = c("category", "location", "status")) %>%
-                mutate(needed = required - total)
+                mutate(needed = req_quantity - total, 
+                       coverage = round((total/req_quantity)*100, digits = 2),
+                       health = round((condition/req_condition)*100, digits = 2))
         return(results)
 }
-
 
 assets.by_location <- function(loc = default_location, sta = default_status) {
         # Load assets data
@@ -56,17 +58,17 @@ assets.by_location <- function(loc = default_location, sta = default_status) {
         # Complete the transformations
         results <- results %>% 
                 group_by( location, category, status) %>%
-                summarise(total = n(), health = mean(condition))
+                summarise(total = n(), condition = round(mean(condition), 
+                                                      digits = 2))
         
         # Join requirements, calculate "needed" column
         results <- results %>% 
                 left_join(req, by = c("category", "location", "status")) %>%
-                mutate(needed = required - total)
+                mutate(needed = req_quantity - total,
+                       coverage = round((total/req_quantity)*100, digits = 2),
+                       health = round((condition/req_condition)*100, digits = 2))
         return(results)
 }
-
-
-
 
 assets.by_project <- function(pro = default_project, cat = default_category) {
         # Load assets data
@@ -89,6 +91,7 @@ assets.by_project <- function(pro = default_project, cat = default_category) {
         # Complete the transformations
         results <- results %>% 
                 group_by(project, category) %>%
-                summarise(total = n(), health = mean(condition))
+                summarise(total = n(), health = round(mean(condition), 
+                                                      digits = 2))
         return(results)
 }
