@@ -11,6 +11,7 @@ default_project <- "ALL"
 assets_file <- "./data/assets.csv"
 cat_req_file <- "./data/category_requirements.csv"
 asset_maint_file <- "./data/asset_maintenances.csv"
+action_logs_file <- "./data/action_logs.csv"
 
 # Assets
 assets_col_names <- c("company", "asset_name", "asset_tag", "model",

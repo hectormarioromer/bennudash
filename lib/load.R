@@ -34,10 +34,10 @@ load.category_requirements <- function(filename = cat_req_file) {
         return(d)
 }
 
-#' Load asset_maintenances
+#' Load asset maintenances
 #'
 #' Load asset maintenances data from specified file
-#' @param filename File containing asset maintenaces data
+#' @param filename File containing asset maintenances data
 #' @return A tibble
 #' @export
 
@@ -46,5 +46,18 @@ load.asset_maintenances <- function(filename = asset_maint_file) {
         d <- read_csv(filename, 
                       col_types = asset_maint_cols,
                       na = c("", "NA", "null"))
+        return(d)
+}
+
+#' Load action logs
+#'
+#' Load action logs data from specified file
+#' @param filename File containing action logs data
+#' @return A tibble
+#' @export
+
+load.action_logs <- function(filename = action_logs_file) {
+        # Source: snipe-it custom assets report
+        d <- read_csv(filename)
         return(d)
 }

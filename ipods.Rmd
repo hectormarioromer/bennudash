@@ -40,22 +40,22 @@ La siguiente relación presenta la distribución de IPODs por localidad:
 
 `r ipods[,c(-1,-7)]`
 
-## ¿En qué condición se encuentran los equipos desplegados? 
+## ¿En qué condición se encuentran los equipos? 
 #### ¿cómo medimos la salud del parque operativo?
 
 Snipe-IT no maneja de forma natural un campo para la condición o estado de los equipos. Sin embargo, permite la creación de *custom fields* o campos customizados. Hemos creado un campo *condition* asignado a los IPODs, que toma valores según los siguientes criterios:
 
-5 - Equipo nuevo y no desplegado. 
+5 - Nuevo (no desplegado). 
 
-4 - Equipo nuevo y desplegado. En excelente condiciones. 
+4 - Nuevo (desplegado). En excelente condiciones. 
 
-3 - Equipo en buenas condiciones. Su rendimiento es el esperado.
+3 - En buenas condiciones. Su rendimiento es el esperado.
 
-2 - Equipo en condiciones deficientes. Rendimiento disminuido.
+2 - En condiciones deficientes. Rendimiento disminuido. Presenta fallos.
 
-1 - Equipo en malas condiciones. No rinde lo esperado. No funciona.
+1 - En malas condiciones. No rinde lo esperado. No funciona.
 
-0 - Equipo dañado. Descartado. Retirado del parque operativo.
+0 - Dañado. Descartado.
 
 
 
