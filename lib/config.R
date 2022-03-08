@@ -10,6 +10,7 @@ default_project <- "ALL"
 # Default file names
 assets_file <- "./data/assets.csv"
 cat_req_file <- "./data/category_requirements.csv"
+asset_maint_file <- "./data/asset_maintenances.csv"
 
 # Assets
 assets_col_names <- c("company", "asset_name", "asset_tag", "model",
@@ -84,4 +85,16 @@ assets_col_types <- cols(
         imei2 = col_character(),
         fidelization_date= col_datetime(format = ""),
         contract_length = col_number()
+)
+
+asset_maint_cols <- cols(
+        asset_tag = col_factor(),
+        asset_id = col_double(),
+        name = col_factor(),
+        asset_maintenance_type = col_factor(),
+        title = col_factor(),
+        start_date = col_date(format = ""),
+        completion_date = col_date(format = ""),
+        notes = col_character(),
+        cost = col_number()
 )

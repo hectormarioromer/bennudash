@@ -4,9 +4,6 @@ author: "Tecnología & Sistemas"
 date: "`r Sys.Date()`"
 output:
   html_notebook: default
-  html_document:
-    df_print: paged
-  pdf_document: default
 editor_options:
   chunk_output_type: inline
 ---
@@ -16,7 +13,7 @@ editor_options:
 El presente documento responde las siguientes preguntas sobre nuestro parque operativo de IPODs: 
 
 - ¿Cuántos IPODs tenemos desplegados? ¿cuántos debemos tener? ¿cuántos nos hacen falta?
-- ¿En qué condición se encuentran los equipos desplegados? ¿cómo podemos medir la salud del parque operativo?
+- ¿En qué condición se encuentran los equipos desplegados? ¿cómo medimos la salud del parque operativo?
 - ¿Cuántos IPODs han tenido reemplazo de batería? De esos, ¿cuántos fueron reintegrados? ¿cuántos fueron descartados? ¿cuántos no han tenido reemplazo?
 
 Para responder estas preguntas, la fuente principal de información será el sistema de gestión de activos **Snipe-IT**, implementado en Junio del 2021. La información anterior a este período ha sido obtenida de los formularios de control, cuya data ha sido digitada en el sistema. 
@@ -43,5 +40,23 @@ La siguiente relación presenta la distribución de IPODs por localidad:
 
 `r ipods[,c(-1,-7)]`
 
-## ¿Cuál es la salud del parque operativo?
-#### 
+## ¿En qué condición se encuentran los equipos desplegados? 
+#### ¿cómo medimos la salud del parque operativo?
+
+Snipe-IT no maneja de forma natural un campo para la condición o estado de los equipos. Sin embargo, permite la creación de *custom fields* o campos customizados. Hemos creado un campo *condition* asignado a los IPODs, que toma valores según los siguientes criterios:
+
+5 - Equipo nuevo y no desplegado. 
+
+4 - Equipo nuevo y desplegado. En excelente condiciones. 
+
+3 - Equipo en buenas condiciones. Su rendimiento es el esperado.
+
+2 - Equipo en condiciones deficientes. Rendimiento disminuido.
+
+1 - Equipo en malas condiciones. No rinde lo esperado. No funciona.
+
+0 - Equipo dañado. Descartado. Retirado del parque operativo.
+
+
+
+        

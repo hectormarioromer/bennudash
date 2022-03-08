@@ -1,6 +1,6 @@
-#' Load assets
+#' Load data
 #'
-#' Load assets data from specified file
+#' Load assets
 #' @name load_assets
 #' @usage load_assets(filename)
 #' @param filename File containing assets data.
@@ -9,8 +9,8 @@
 #' @export
 
 suppressPackageStartupMessages(library(readr))
-
 source("./lib/config.R")
+
 load.assets <- function(filename = assets_file) {
         # Source: snipe-it custom assets report
         d <- read_csv(filename, 
@@ -27,11 +27,24 @@ load.assets <- function(filename = assets_file) {
 #' @return A tibble
 #' @export
 
-source("./lib/config.R")
-suppressPackageStartupMessages(library(readr))
 load.category_requirements <- function(filename = cat_req_file) {
         # Source: snipe-it custom assets report
         d <- read_csv(filename,
                       col_types = "fffnn")
+        return(d)
+}
+
+#' Load asset_maintenances
+#'
+#' Load asset maintenances data from specified file
+#' @param filename File containing asset maintenaces data
+#' @return A tibble
+#' @export
+
+load.asset_maintenances <- function(filename = asset_maint_file) {
+        # Source: snipe-it custom assets report
+        d <- read_csv(filename, 
+                      col_types = asset_maint_cols,
+                      na = c("", "NA", "null"))
         return(d)
 }
