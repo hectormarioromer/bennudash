@@ -11,8 +11,8 @@ default_project <- "ALL"
 assets_file <- "./data/assets.csv"
 cat_req_file <- "./data/category_requirements.csv"
 asset_maint_file <- "./data/asset_maintenances.csv"
-action_logs_file <- "./data/action_logs.csv"
-
+condition_logs_file <- "./data/asset_condition_logs.csv"
+status_logs_file <- "./data/asset_status_logs.csv"
 # Assets
 assets_col_names <- c("company", "asset_name", "asset_tag", "model",
                 "model_no", "category", "manufacturer", "serial",
@@ -90,8 +90,8 @@ assets_col_types <- cols(
 
 asset_maint_cols <- cols(
         asset_tag = col_factor(),
-        asset_id = col_double(),
-        name = col_factor(),
+        category = col_factor(),
+        supplier = col_factor(),
         asset_maintenance_type = col_factor(),
         title = col_factor(),
         start_date = col_date(format = ""),

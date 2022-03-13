@@ -28,7 +28,7 @@ load.assets <- function(filename = assets_file) {
 #' @export
 
 load.category_requirements <- function(filename = cat_req_file) {
-        # Source: snipe-it custom assets report
+        # Source: csv file
         d <- read_csv(filename,
                       col_types = "fffnn")
         return(d)
@@ -42,22 +42,36 @@ load.category_requirements <- function(filename = cat_req_file) {
 #' @export
 
 load.asset_maintenances <- function(filename = asset_maint_file) {
-        # Source: snipe-it custom assets report
+        # Source: snipe-it asset_maintenances
         d <- read_csv(filename, 
                       col_types = asset_maint_cols,
                       na = c("", "NA", "null"))
         return(d)
 }
 
-#' Load action logs
+#' Load asset condition logs
 #'
-#' Load action logs data from specified file
-#' @param filename File containing action logs data
+#' Load asset condition logs data from specified file
+#' @param filename File containing asset condition logs data
 #' @return A tibble
 #' @export
 
-load.action_logs <- function(filename = action_logs_file) {
-        # Source: snipe-it custom assets report
+load.asset_condition_logs <- function(filename = condition_logs_file) {
+        # Source: query over snipeit/action_logs
+        d <- read_csv(filename)
+        return(d)
+}
+
+
+#' Load asset status logs
+#'
+#' Load asset status logs data from specified file
+#' @param filename File containing asset status logs data
+#' @return A tibble
+#' @export
+
+load.asset_status_logs <- function(filename = status_logs_file) {
+        # Source: query over snipeit/action_logs
         d <- read_csv(filename)
         return(d)
 }
