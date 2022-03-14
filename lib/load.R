@@ -7,8 +7,11 @@
 #' Default value
 #' @return A tibble
 #' @export
-
+suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(readr))
+suppressPackageStartupMessages(library(tidyjson))
+suppressPackageStartupMessages(library(tidyr))
+
 source("./lib/config.R")
 
 load.assets <- function(filename = assets_file) {
@@ -58,7 +61,16 @@ load.asset_maintenances <- function(filename = asset_maint_file) {
 
 load.asset_condition_logs <- function(filename = condition_logs_file) {
         # Source: query over snipeit/action_logs
-        d <- read_csv(filename)
+        d <- read_csv(filename, show_col_types = FALSE)
+
+        l <- d$log_meta %>% spread_values(
+                value_old = jstring(`_snipeit_condition_2`, old),
+                value_new = jstring(`_snipeit_condition_2`, new)
+        )
+        d <- d %>% bind_cols(l) %>% 
+                mutate(value_type = rep('condition', times = nrow(d))) %>%
+                select(asset_tag, created_at, value_type, value_old, value_new)
+        
         return(d)
 }
 
@@ -72,6 +84,12 @@ load.asset_condition_logs <- function(filename = condition_logs_file) {
 
 load.asset_status_logs <- function(filename = status_logs_file) {
         # Source: query over snipeit/action_logs
-        d <- read_csv(filename)
+        d <- read_csv(filename, show_col_types = FALSE)
+        l <- d$log_meta %>% spread_values(
+                value_old = jstring(status_id, old),
+                value_new = jstring(status_id, new))
+        d <- d %>% bind_cols(l) %>% 
+                mutate(value_type = rep('status', times = nrow(d))) %>%
+                select(asset_tag, created_at, value_type, value_old, value_new)
         return(d)
 }

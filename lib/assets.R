@@ -1,6 +1,3 @@
-suppressPackageStartupMessages(library(dplyr))
-suppressPackageStartupMessages(library(tidyr))
-
 options(dplyr.summarise.inform = FALSE)
 
 source("./lib/config.R")
