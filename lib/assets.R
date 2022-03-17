@@ -76,13 +76,13 @@ assets.by_project <- function(pro = default_project, cat = default_category) {
         
         # Grabs columns of interest
         results <- assets %>% select(project, category, condition)
-        # Filter by category, if not ALL
+        # Filter by projects, if not ALL
         if (pro != "ALL") {
                 # First filter 
                 results <- results %>% 
                         filter(project == pro)   
         }
-        # Filter by status if not ALL
+        # Filter by category if not ALL
         if (cat != "ALL") {
                 results <- results %>% 
                         filter(category == cat)   
@@ -92,5 +92,30 @@ assets.by_project <- function(pro = default_project, cat = default_category) {
                 group_by(project, category) %>%
                 summarise(total = n(), health = round(mean(condition), 
                                                       digits = 2))
+        return(results)
+}
+
+
+assets.health <- function(cat = default_category, sta = default_status) {
+        # Load assets data
+        assets <- load.assets()
+        global_health <- 3.00
+        
+        # Grabs columns of interest
+        results <- assets %>% select(category, status, condition) %>%
+                filter(status == sta)
+       
+        # Filter by category if not ALL
+        if (cat != "ALL") {
+                results <- results %>% 
+                        filter(category == cat)   
+        }
+        # Complete the transformations
+        results <- results %>% 
+                group_by(category) %>%
+                summarise(total = n(), avg_condition = round(mean(condition), 
+                                                      digits = 2)) %>%
+                mutate(health = round((avg_condition / global_health)*100, 
+                                      digits = 2))
         return(results)
 }

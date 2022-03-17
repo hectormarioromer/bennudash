@@ -62,6 +62,13 @@ Snipe-IT no maneja de forma natural un campo para la condición o estado de los 
 
 Para calcular la columna *health* establecemos el valor 3 como el requerido para operación en tienda. Dividimos la condición promedio de los equipos entre la condición requerida y lo multiplicamos por 100.
 
+```{r}
+h <- assets.health(cat = "IPOD")
+h
+```
+
+Actualmente los `r h$total` IPODs desplegados tienen una condición promedio de **`r h$avg_condition`**, lo que representa una salud de **`r h$health`** para el parque operativo.
+
 
 ## ¿Cuántos IPODs han ido a taller? 
 #### ¿cuántos fueron reparados? ¿cuántos fueron descartados?
@@ -69,7 +76,14 @@ Para calcular la columna *health* establecemos el valor 3 como el requerido para
 A la fecha hemos llevado **`r nrow(mant)`** equipos a taller. Como resultado, **`r reparados`** equipos fueron *reparados* y reintegrados al parque, para un porcentaje de **`r round(reparados/nrow(mant)*100, digits = 2)`%**, mientras que **`r descartados`** fueron *descartados*, para un porcentaje de **`r round(descartados/nrow(mant)*100, digits = 2)`%**. 
 
 ```{r}
+library(ggplot2)
 md <- mant %>% count(start_date, notes)
-md <- spread(md, notes, n, fill = 0)
+
+r <- ggplot(md, aes(fill=notes, x=factor(start_date), y=n)) +
+        theme_bw() +
+        geom_bar(position="stack", stat = "identity") +
+        labs(title="Mantenimientos IPODs", x = "", y="Cantidad") +
+        theme(axis.text.x = element_text(angle = 90))
+r
 ```
 
