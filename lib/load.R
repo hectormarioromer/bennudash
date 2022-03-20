@@ -93,3 +93,9 @@ load.asset_status_logs <- function(filename = status_logs_file) {
                 select(asset_tag, created_at, value_type, value_old, value_new)
         return(d)
 }
+
+load.invoices_csi <- function(filename = bennu_it_file) {
+        csi <- read_excel(bennu_it_file, sheet = "sup-csi-fac") %>%
+                mutate(localidad = as.factor(localidad))
+        return(csi)
+}

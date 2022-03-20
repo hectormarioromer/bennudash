@@ -13,6 +13,8 @@ cat_req_file <- "./data/category_requirements.csv"
 asset_maint_file <- "./data/asset_maintenances.csv"
 condition_logs_file <- "./data/asset_condition_logs.csv"
 status_logs_file <- "./data/asset_status_logs.csv"
+bennu_it_file <- ".//data//BENNU IT MANAGER.xlsx"
+
 # Assets
 assets_col_names <- c("company", "asset_name", "asset_tag", "model",
                 "model_no", "category", "manufacturer", "serial",
