@@ -9,6 +9,7 @@
 #' @export
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(readr))
+suppressPackageStartupMessages(library(readxl))
 suppressPackageStartupMessages(library(tidyjson))
 suppressPackageStartupMessages(library(tidyr))
 
@@ -98,4 +99,11 @@ load.invoices_csi <- function(filename = bennu_it_file) {
         csi <- read_excel(bennu_it_file, sheet = "sup-csi-fac") %>%
                 mutate(localidad = as.factor(localidad))
         return(csi)
+}
+
+load.invoices_altice <- function(filename = bennu_it_file) {
+        altice <- read_excel(bennu_it_file, sheet = "sup-altice-fac") %>%
+                mutate(Titular = as.factor(Titular), 
+                       Concepto = as.factor(Concepto))
+        return(altice)
 }
