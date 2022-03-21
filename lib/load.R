@@ -1,3 +1,11 @@
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(readr))
+suppressPackageStartupMessages(library(readxl))
+suppressPackageStartupMessages(library(tidyjson))
+suppressPackageStartupMessages(library(tidyr))
+
+source("./lib/config.R")
+
 #' Load data
 #'
 #' Load assets
@@ -7,12 +15,6 @@
 #' Default value
 #' @return A tibble
 #' @export
-suppressPackageStartupMessages(library(dplyr))
-suppressPackageStartupMessages(library(readr))
-suppressPackageStartupMessages(library(tidyjson))
-suppressPackageStartupMessages(library(tidyr))
-
-source("./lib/config.R")
 
 load.assets <- function(filename = assets_file) {
         # Source: snipe-it custom assets report
@@ -74,7 +76,6 @@ load.asset_condition_logs <- function(filename = condition_logs_file) {
         return(d)
 }
 
-
 #' Load asset status logs
 #'
 #' Load asset status logs data from specified file
@@ -94,8 +95,27 @@ load.asset_status_logs <- function(filename = status_logs_file) {
         return(d)
 }
 
+#' Load invoices csi
+#'
+#' Load invoices from Grupo CSI
+#' @param filename File containing invoices data
+#' @return A tibble
+#' @export
 load.invoices_csi <- function(filename = bennu_it_file) {
         csi <- read_excel(bennu_it_file, sheet = "sup-csi-fac") %>%
                 mutate(localidad = as.factor(localidad))
         return(csi)
+}
+
+#' Load invoices altice
+#'
+#' Load invoices from Altice
+#' @param filename File containing invoices data
+#' @return A tibble
+#' @export
+load.invoices_altice <- function(filename = bennu_it_file) {
+        altice <- read_excel(bennu_it_file, sheet = "sup-altice-fac") %>%
+                mutate(Titular = as.factor(Titular), 
+                       Concepto = as.factor(Concepto))
+        return(altice)
 }
