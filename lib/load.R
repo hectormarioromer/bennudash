@@ -119,3 +119,16 @@ load.invoices_altice <- function(filename = bennu_it_file) {
                        Concepto = as.factor(Concepto))
         return(altice)
 }
+
+#' Load sales (by hour)
+#'
+#' Load store sales by hour
+#' @param filename File containing sales by hour data
+#' @return A tibble
+#' @export
+load.sales_by_hour <- function(filename = sales_by_hour) {
+        # Source: csv file
+        d <- read_csv(filename, col_types = "fcfnnnnn") %>%
+                mutate(date = as.Date(date, format = "%Y%m%d"))
+        return(d) 
+}

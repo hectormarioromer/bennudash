@@ -14,6 +14,7 @@ asset_maint_file <- "./data/asset_maintenances.csv"
 condition_logs_file <- "./data/asset_condition_logs.csv"
 status_logs_file <- "./data/asset_status_logs.csv"
 bennu_it_file <- ".//data//BENNU IT MANAGER.xlsx"
+sales_by_hour <- "./data/sales_by_hour.csv"
 
 # Assets
 assets_col_names <- c("company", "asset_name", "asset_tag", "model",
