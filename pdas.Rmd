@@ -1,0 +1,92 @@
+---
+title: 'Parque Operativo: Categoría: IPOD'
+author: "Tecnología & Sistemas"
+date: "`r Sys.Date()`"
+output:
+  html_notebook: default
+  pdf_document: default
+  html_document:
+    df_print: paged
+editor_options:
+  chunk_output_type: inline
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+## Generales
+
+El presente documento responde las siguientes preguntas sobre nuestro parque operativo de IPODs: 
+
+- ¿Cuántos IPODs tenemos desplegados? ¿cuántos debemos tener? ¿cuántos nos hacen falta?
+- ¿En qué condición se encuentran los equipos desplegados? ¿cómo medimos la salud del parque operativo?
+- ¿Cuántos IPODs han ido a taller? ¿cuántos fueron reparados? ¿cuántos fueron descartados?
+
+Para responder estas preguntas, la fuente principal de información será el sistema de gestión de activos **Snipe-IT**, implementado en Junio del 2021. La información anterior a este período ha sido obtenida de los formularios de control, cuya data ha sido digitada en el sistema. 
+
+Con esto, se consigue describir la situación actual del parque operativo y su comportamiento histórico. Logrado esto, se apoya la toma de decisiones certeras y oportunas respecto al parque de IPODs, para lograr un balance costo-operativo. A continuación, se contestan las preguntas planteadas.
+
+## ¿Cuántos IPODs tenemos desplegados?
+#### ¿cuántos debemos tener? ¿cuántos nos hacen falta?
+
+```{r}
+source("./lib/assets.R")
+ipods <- assets.by_category(cat = "IPOD")
+requeridos <- sum(ipods$req_quantity)
+desplegados <- sum(ipods$total)
+necesitados <- requeridos-desplegados
+cobertura <- round((desplegados/requeridos)*100, digits = 2)
+mant <- load.asset_maintenances() %>% filter(category == "IPOD")
+reparados <- as.numeric(mant %>% filter(notes == "REPARADO") %>% count())
+descartados <- as.numeric(mant %>% filter(notes == "DESCARTADO") %>% count())
+revision <- as.numeric(mant %>% filter(notes == "EN REVISIÓN") %>% count())
+```
+
+Tenemos **`r desplegados`** equipos desplegados de un total de **`r requeridos`** equipos requeridos para la operación. Esto representa una cobertura de **`r cobertura`%**. Necesitamos desplegar **`r necesitados`** equipos para lograr el *100%* de cobertura operativa. La siguiente relación presenta la distribución de IPODs por localidad:
+
+`r ipods[,c(-1, -3)]`
+
+## ¿En qué condición se encuentran los equipos? 
+#### ¿cómo medimos la salud del parque operativo?
+
+Snipe-IT no maneja de forma natural un campo para la condición o estado de los equipos. Sin embargo, permite la creación de *custom fields*. Hemos creado un campo *condition* asignado a los equipos, que toma valores según los siguientes criterios:
+
+*5 - Nuevo* (no desplegado). 
+
+*4 - Nuevo (desplegado).* En excelente condiciones. 
+
+*3 - En buenas condiciones.* Su rendimiento es el esperado.
+
+*2 - En condiciones deficientes.* Rendimiento disminuido. Presenta fallos.
+
+*1 - En malas condiciones.* No rinde lo esperado. No funciona.
+
+*0 - Dañado.* Descartado.
+
+Para calcular la columna *health* establecemos el valor 3 como el requerido para operación en tienda. Dividimos la condición promedio de los equipos entre la condición requerida y lo multiplicamos por 100. La condición promedio de los `r h$total` IPODs desplegados es de **`r h$avg_condition`**, lo que representa una salud de **`r h$health`%** para el parque operativo.
+
+```{r}
+h <- assets.health(cat = "IPOD")
+h
+```
+
+
+## ¿Cuántos IPODs han ido a taller? 
+#### ¿cuántos fueron reparados? ¿cuántos fueron descartados?
+
+A la fecha hemos llevado **`r nrow(mant)`** equipos a taller. Como resultado, **`r reparados`** IPODs fueron *reparados* y reintegrados al parque operativo, para un porcentaje de **`r round(reparados/(reparados+descartados)*100, digits = 2)`%**, mientras que **`r descartados`** IPODs fueron *descartados*, para un porcentaje de **`r round(descartados/(reparados+descartados)*100, digits = 2)`%**. Actualmente tenemos **`r revision`** IPODs *en revisión*.
+
+```{r}
+library(ggplot2)
+md <- mant %>% count(start_date, notes)
+
+r <- ggplot(md, aes(fill=notes, x=factor(start_date), y=n)) +
+        theme_bw() +
+        geom_bar(position="stack", stat = "identity") +
+        labs(title="Mantenimientos IPODs", x = "", y="Cantidad") +
+        theme(axis.text.x = element_text(angle = 90), 
+              legend.position = "bottom", legend.title = element_blank())
+r
+```
