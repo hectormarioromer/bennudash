@@ -4,6 +4,9 @@ author: "Tecnología & Sistemas"
 date: "`r Sys.Date()`"
 output:
   html_notebook: default
+  pdf_document: default
+  html_document:
+    df_print: paged
 editor_options:
   chunk_output_type: inline
 ---
@@ -38,12 +41,12 @@ cobertura <- round((desplegados/requeridos)*100, digits = 2)
 mant <- load.asset_maintenances() %>% filter(category == "IPOD")
 reparados <- as.numeric(mant %>% filter(notes == "REPARADO") %>% count())
 descartados <- as.numeric(mant %>% filter(notes == "DESCARTADO") %>% count())
-reparacion <- as.numeric(mant %>% filter(notes == "EN REPARACIÓN") %>% count())
+revision <- as.numeric(mant %>% filter(notes == "EN REVISIÓN") %>% count())
 ```
 
 Tenemos **`r desplegados`** equipos desplegados de un total de **`r requeridos`** equipos requeridos para la operación. Esto representa una cobertura de **`r cobertura`%**. Necesitamos desplegar **`r necesitados`** equipos para lograr el *100%* de cobertura operativa. La siguiente relación presenta la distribución de IPODs por localidad:
 
-`r ipods[,c(-1, -3)]`
+`r ipods[,c(-2, -4)]`
 
 ## ¿En qué condición se encuentran los equipos? 
 #### ¿cómo medimos la salud del parque operativo?
@@ -73,7 +76,7 @@ h
 ## ¿Cuántos IPODs han ido a taller? 
 #### ¿cuántos fueron reparados? ¿cuántos fueron descartados?
 
-A la fecha hemos llevado **`r nrow(mant)`** equipos a taller. Como resultado, **`r reparados`** IPODs fueron *reparados* y reintegrados al parque operativo, para un porcentaje de **`r round(reparados/(reparados+descartados)*100, digits = 2)`%**, mientras que **`r descartados`** IPODs fueron *descartados*, para un porcentaje de **`r round(descartados/(reparados+descartados)*100, digits = 2)`%**. Actualmente tenemos **`r reparacion`** IPODs *en reparación*.
+A la fecha hemos llevado **`r nrow(mant)`** equipos a taller. Como resultado, **`r reparados`** IPODs fueron *reparados* y reintegrados al parque operativo, para un porcentaje de **`r round(reparados/(reparados+descartados)*100, digits = 2)`%**, mientras que **`r descartados`** IPODs fueron *descartados*, para un porcentaje de **`r round(descartados/(reparados+descartados)*100, digits = 2)`%**. Actualmente tenemos **`r revision`** IPODs *en revisión*.
 
 ```{r}
 library(ggplot2)

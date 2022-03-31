@@ -21,7 +21,9 @@ load.assets <- function(filename = assets_file) {
         d <- read_csv(filename, 
                 col_names = assets_col_names,
                 col_types = assets_col_types,
-                skip = 1)
+                skip = 1) %>%
+                mutate(report_date = as.Date('2022-03-28'))
+        
         return(d)
 }
 
@@ -50,7 +52,8 @@ load.asset_maintenances <- function(filename = asset_maint_file) {
         # Source: snipe-it asset_maintenances
         d <- read_csv(filename, 
                       col_types = asset_maint_cols,
-                      na = c("", "NA", "null"))
+                      na = c("", "NA", "null")) %>%
+                mutate(report_date = as.Date('2022-03-28'))
         return(d)
 }
 
@@ -63,7 +66,8 @@ load.asset_maintenances <- function(filename = asset_maint_file) {
 
 load.asset_condition_logs <- function(filename = condition_logs_file) {
         # Source: query over snipeit/action_logs
-        d <- read_csv(filename, show_col_types = FALSE)
+        d <- read_csv(filename, show_col_types = FALSE) %>%
+                mutate(report_date = as.Date('2022-03-28'))
 
         l <- d$log_meta %>% spread_values(
                 value_old = jstring(`_snipeit_condition_2`, old),
@@ -85,7 +89,8 @@ load.asset_condition_logs <- function(filename = condition_logs_file) {
 
 load.asset_status_logs <- function(filename = status_logs_file) {
         # Source: query over snipeit/action_logs
-        d <- read_csv(filename, show_col_types = FALSE)
+        d <- read_csv(filename, show_col_types = FALSE) %>%
+                mutate(report_date = as.Date('2022-03-28'))
         l <- d$log_meta %>% spread_values(
                 value_old = jstring(status_id, old),
                 value_new = jstring(status_id, new))
@@ -103,7 +108,7 @@ load.asset_status_logs <- function(filename = status_logs_file) {
 #' @export
 load.invoices_csi <- function(filename = bennu_it_file) {
         csi <- read_excel(bennu_it_file, sheet = "sup-csi-fac") %>%
-                mutate(localidad = as.factor(localidad))
+                mutate(localidad = as.factor(localidad), report_date = as.Date('2022-03-28'))
         return(csi)
 }
 
@@ -116,7 +121,7 @@ load.invoices_csi <- function(filename = bennu_it_file) {
 load.invoices_altice <- function(filename = bennu_it_file) {
         altice <- read_excel(bennu_it_file, sheet = "sup-altice-fac") %>%
                 mutate(Titular = as.factor(Titular), 
-                       Concepto = as.factor(Concepto))
+                       Concepto = as.factor(Concepto), report_date = as.Date('2022-03-28'))
         return(altice)
 }
 
@@ -129,6 +134,6 @@ load.invoices_altice <- function(filename = bennu_it_file) {
 load.sales_by_hour <- function(filename = sales_by_hour) {
         # Source: csv file
         d <- read_csv(filename, col_types = "fcfnnnnn") %>%
-                mutate(date = as.Date(date, format = "%Y%m%d"))
+                mutate(date = as.Date(date, format = "%Y%m%d"), report_date = as.Date('2022-03-28'))
         return(d) 
 }

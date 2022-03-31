@@ -9,7 +9,7 @@ assets.by_category <- function(cat = default_category, sta = default_status) {
         req <- load.category_requirements()
         
         # Grabs columns of interest
-        results <- assets %>% select(category, location, status, condition)
+        results <- assets %>% select(report_date, category, location, status, condition)
         # Filter by category, if not ALL
         if (cat != "ALL") {
                 # First filter 
@@ -23,7 +23,7 @@ assets.by_category <- function(cat = default_category, sta = default_status) {
         }
         # Complete the transformations
         results <- results %>% 
-                group_by(category, location, status) %>%
+                group_by(report_date, category, location, status) %>%
                 summarise(total = n(), condition = round(mean(condition), 
                                                       digits = 2))
         
@@ -42,7 +42,7 @@ assets.by_location <- function(loc = default_location, sta = default_status) {
         req <- load.category_requirements()
         
         # Grabs columns of interest
-        results <- assets %>% select(location, category, status, condition)
+        results <- assets %>% select(report_date, location, category, status, condition)
         # Filter by category, if not ALL
         if (loc != "ALL") {
                 # First filter 
@@ -56,7 +56,7 @@ assets.by_location <- function(loc = default_location, sta = default_status) {
         }
         # Complete the transformations
         results <- results %>% 
-                group_by( location, category, status) %>%
+                group_by(report_date, location, category, status) %>%
                 summarise(total = n(), condition = round(mean(condition), 
                                                       digits = 2))
         
@@ -75,7 +75,7 @@ assets.by_project <- function(pro = default_project, cat = default_category) {
         req <- load.category_requirements()
         
         # Grabs columns of interest
-        results <- assets %>% select(project, category, condition)
+        results <- assets %>% select(report_date, project, category, condition)
         # Filter by projects, if not ALL
         if (pro != "ALL") {
                 # First filter 
@@ -89,7 +89,7 @@ assets.by_project <- function(pro = default_project, cat = default_category) {
         }
         # Complete the transformations
         results <- results %>% 
-                group_by(project, category) %>%
+                group_by(report_date, project, category) %>%
                 summarise(total = n(), health = round(mean(condition), 
                                                       digits = 2))
         return(results)
@@ -102,7 +102,7 @@ assets.health <- function(cat = default_category, sta = default_status) {
         global_health <- 3.00
         
         # Grabs columns of interest
-        results <- assets %>% select(category, status, condition) %>%
+        results <- assets %>% select(report_date, category, status, condition) %>%
                 filter(status == sta)
        
         # Filter by category if not ALL
@@ -112,7 +112,7 @@ assets.health <- function(cat = default_category, sta = default_status) {
         }
         # Complete the transformations
         results <- results %>% 
-                group_by(category) %>%
+                group_by(report_date, category) %>%
                 summarise(total = n(), avg_condition = round(mean(condition), 
                                                       digits = 2)) %>%
                 mutate(health = round((avg_condition / global_health)*100, 
